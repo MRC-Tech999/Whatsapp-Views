@@ -1,5 +1,3 @@
--- whatsapp_views.sql
-
 CREATE DATABASE IF NOT EXISTS whatsapp_views;
 USE whatsapp_views;
 
