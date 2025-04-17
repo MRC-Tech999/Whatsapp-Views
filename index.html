@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>WhatsApp Views</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       background: linear-gradient(to bottom right, #3a0ca3, #7209b7, #4361ee);
       color: white;
       text-align: center;
-      padding-top: 80px;
+      padding: 50px 20px;
+      min-height: 100vh;
     }
 
     h1 { font-size: 3em; margin-bottom: 10px; }
-    p { font-size: 1.2em; margin-bottom: 30px; padding: 0 20px; }
+    p { font-size: 1.2em; margin-bottom: 30px; }
 
     .btn {
       background-color: #00f0ff;
@@ -26,10 +28,12 @@
       border-radius: 10px;
       margin: 10px;
       cursor: pointer;
+      width: 90%;
+      max-width: 400px;
     }
 
     .footer {
-      margin-top: 80px;
+      margin-top: 60px;
       font-size: 0.9em;
     }
 
@@ -42,13 +46,13 @@
 <body>
 
   <h1>WhatsApp Views</h1>
-  <p>Ajoutez votre numéro pour recevoir des vues<br>et téléchargez le fichier des contacts</p>
+  <p>Ajoutez votre numéro WhatsApp pour recevoir des vues.<br> Téléchargez la liste des contacts avec un code.</p>
 
   <button class="btn" onclick="window.location='submit.html'">Soumettre mon numéro</button>
   <button class="btn" onclick="telecharger()">Télécharger les contacts</button>
 
   <div class="footer">
-    <p>Suivez-nous sur <a href="https://instagram.com/j.m.h.2024" target="_blank">@j.m.h.2024</a> |
+    <p>Suivez-nous sur <a href="https://instagram.com/j.m.h.2024" target="_blank">@j.m.h.2024</a><br>
     Contact : <a href="mailto:contactwhatsappviews@gmail.com">contactwhatsappviews@gmail.com</a><br>
     Groupe WhatsApp : <a href="https://chat.whatsapp.com/FOIu2pw3KYWH4B69zHbNSL" target="_blank">Rejoindre</a><br>
     © 2025 MRC-Tech</p>
@@ -64,5 +68,6 @@
       }
     }
   </script>
+
 </body>
 </html>
