@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>WhatsApp Views</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #3a0ca3, #7209b7, #4361ee);
+      color: white;
+      text-align: center;
+      padding-top: 80px;
+    }
+
+    h1 { font-size: 3em; margin-bottom: 10px; }
+    p { font-size: 1.2em; margin-bottom: 30px; padding: 0 20px; }
+
+    .btn {
+      background-color: #00f0ff;
+      color: black;
+      font-weight: bold;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 10px;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    .footer {
+      margin-top: 80px;
+      font-size: 0.9em;
+    }
+
+    a {
+      color: #00f0ff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>WhatsApp Views</h1>
+  <p>Ajoutez votre numéro pour recevoir des vues<br>et téléchargez le fichier des contacts</p>
+
+  <button class="btn" onclick="window.location='submit.html'">Soumettre mon numéro</button>
+  <button class="btn" onclick="telecharger()">Télécharger les contacts</button>
+
+  <div class="footer">
+    <p>Suivez-nous sur <a href="https://instagram.com/j.m.h.2024" target="_blank">@j.m.h.2024</a> |
+    Contact : <a href="mailto:contactwhatsappviews@gmail.com">contactwhatsappviews@gmail.com</a><br>
+    Groupe WhatsApp : <a href="https://chat.whatsapp.com/FOIu2pw3KYWH4B69zHbNSL" target="_blank">Rejoindre</a><br>
+    © 2025 MRC-Tech</p>
+  </div>
+
+  <script>
+    function telecharger() {
+      let code = prompt("Entrez le code pour télécharger :");
+      if (code === "2025") {
+        window.location = "contacts.vcf.php";
+      } else {
+        alert("Code incorrect !");
+      }
+    }
+  </script>
+</body>
+</html>
