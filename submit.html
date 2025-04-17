@@ -2,61 +2,74 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Soumettre mon numéro</title>
+  <title>Inscription</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom right, #3a0ca3, #7209b7, #4361ee);
+      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #7209b7, #f72585);
       color: white;
-      text-align: center;
-      padding: 40px 20px;
-      min-height: 100vh;
     }
-
-    input, button {
-      padding: 15px;
-      margin: 10px 0;
-      font-size: 1.1em;
-      border: none;
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
       border-radius: 10px;
-      width: 90%;
-      max-width: 400px;
+      max-width: 500px;
+      margin: auto;
     }
-
-    .btn {
-      background-color: #00f0ff;
-      color: black;
+    input, button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    input[type="text"], input[type="number"] {
+      background: #fff;
+      color: #000;
+    }
+    button {
+      background: white;
+      color: #7209b7;
       font-weight: bold;
-      cursor: pointer;
     }
-
-    .footer {
-      margin-top: 50px;
-      font-size: 0.9em;
+    .social {
+      text-align: center;
+      margin-top: 30px;
     }
-
-    a {
-      color: #00f0ff;
+    .social-btn {
+      background: white;
+      color: #7209b7;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-
-  <h1>Ajoute ton numéro</h1>
-
-  <form method="POST" action="submit.php">
-    <input type="text" name="name" placeholder="Ton prénom" required><br>
-    <input type="text" name="phone" placeholder="Ex : +2250500000000" required><br>
-    <label><input type="checkbox" required> J'accepte les conditions</label><br>
-    <p>Es-tu dans le groupe ? <a href="https://chat.whatsapp.com/FOIu2pw3KYWH4B69zHbNSL" target="_blank">Rejoindre ici</a></p>
-    <button class="btn" type="submit">Soumettre</button>
+  <h2>Inscription</h2>
+  <form action="confirmation.php" method="POST">
+    <input type="text" name="name" placeholder="Votre nom complet" required>
+    <input type="text" name="number" placeholder="Ex: +1XXXXXXXXXX" required>
+    <input type="text" name="code" placeholder="Entrez le code : 2025" required>
+    <label>
+      <input type="checkbox" required> J’accepte les conditions
+    </label>
+    <label>
+      Êtes-vous dans le groupe WhatsApp ?
+      <a href="https://chat.whatsapp.com/FOIu2pw3KYWH4B69zHbNSL" target="_blank" style="color: white; text-decoration: underline;">Rejoindre ici</a>
+    </label>
+    <button type="submit">Soumettre</button>
   </form>
 
-  <div class="footer">
-    <p>© 2025 MRC-Tech</p>
+  <div class="social">
+    <a class="social-btn" href="https://instagram.com/j.m.h.2024" target="_blank">Instagram</a>
+    <a class="social-btn" href="mailto:contactwhatsappviews@gmail.com">Email</a>
   </div>
-
 </body>
 </html>
