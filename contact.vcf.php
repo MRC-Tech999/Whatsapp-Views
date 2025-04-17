@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $user = "root";
-$pass = ""; // ton mot de passe
+$pass = ""; // mot de passe MySQL
 $db = "whatsapp_views";
 
 $conn = new mysqli($host, $user, $pass, $db);
@@ -11,7 +11,6 @@ header('Content-Type: text/vcard');
 header('Content-Disposition: attachment; filename="contacts.vcf"');
 
 $result = $conn->query("SELECT name, phone FROM contacts");
-
 while ($row = $result->fetch_assoc()) {
   echo "BEGIN:VCARD\n";
   echo "VERSION:3.0\n";
