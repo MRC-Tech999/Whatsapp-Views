@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <title>Soumettre mon numéro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       background: linear-gradient(to bottom right, #3a0ca3, #7209b7, #4361ee);
       color: white;
       text-align: center;
-      padding-top: 60px;
+      padding: 40px 20px;
+      min-height: 100vh;
     }
 
     input, button {
       padding: 15px;
-      margin: 10px;
+      margin: 10px 0;
       font-size: 1.1em;
       border: none;
       border-radius: 10px;
-    }
-
-    input {
-      width: 80%;
+      width: 90%;
+      max-width: 400px;
     }
 
     .btn {
@@ -32,14 +32,13 @@
       cursor: pointer;
     }
 
-    label {
-      display: block;
-      margin: 10px 0;
-    }
-
     .footer {
       margin-top: 50px;
       font-size: 0.9em;
+    }
+
+    a {
+      color: #00f0ff;
     }
   </style>
 </head>
@@ -48,10 +47,10 @@
   <h1>Ajoute ton numéro</h1>
 
   <form method="POST" action="submit.php">
-    <input type="text" name="name" placeholder="Ex: Junior" required><br>
-    <input type="text" name="phone" placeholder="Ex: +50912345678" required><br>
+    <input type="text" name="name" placeholder="Ton prénom" required><br>
+    <input type="text" name="phone" placeholder="Ex : +2250500000000" required><br>
     <label><input type="checkbox" required> J'accepte les conditions</label><br>
-    <p>Es-tu dans le groupe ? <a href="https://chat.whatsapp.com/FOIu2pw3KYWH4B69zHbNSL" target="_blank">Rejoins ici</a></p>
+    <p>Es-tu dans le groupe ? <a href="https://chat.whatsapp.com/FOIu2pw3KYWH4B69zHbNSL" target="_blank">Rejoindre ici</a></p>
     <button class="btn" type="submit">Soumettre</button>
   </form>
 
