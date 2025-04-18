@@ -5,6 +5,23 @@
   <title>Enregistrement – Whatsapp Views</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <script>
+    window.addEventListener('DOMContentLoaded', ()=> {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('success')) {
+        document.getElementById('message').textContent = "Contact enregistré avec succès !";
+      }
+      // Compteur : on fetch le CSV et on compte les lignes (on retire l'en-tête)
+      fetch('contacts.csv')
+        .then(res => res.text())
+        .then(text => {
+          const lines = text.trim().split('\n');
+          const count = Math.max(0, lines.length - 1);
+          document.getElementById('count').textContent = "Total inscrits : " + count;
+        })
+        .catch(()=>{/* si erreur, on n'affiche rien */});
+    });
+  </script>
 </head>
 <body>
   <div class="container">
@@ -14,12 +31,16 @@
       <input type="text" name="number" placeholder="Ex : +22512345678" required>
       <button type="submit">Continuer</button>
     </form>
+
+    <p id="message"></p>
+    <p id="count"></p>
+
     <div class="social">
       <a href="https://instagram.com/j.m.h.2024" class="social-btn" target="_blank">Instagram</a>
       <a href="mailto:contactwhatsappviews@gmail.com" class="social-btn">Email</a>
     </div>
+
     <footer>&copy; 2025 MRC‑Tech</footer>
   </div>
-  <a href="#" class="top-link">⇪ Retour en haut</a>
 </body>
 </html>
