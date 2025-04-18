@@ -1,0 +1,68 @@
+/* styles généraux */
+body {
+  margin: 0; padding: 0;
+  background: linear-gradient(135deg, #7209b7, #f72585);
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.container {
+  max-width: 480px;
+  margin: auto;
+  padding: 20px;
+}
+h1 { margin-bottom: 10px; }
+p  { margin-bottom: 20px; }
+input, button, .btn {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  margin: 10px auto;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+}
+input {
+  background: rgba(255,255,255,0.2);
+  color: white;
+}
+button, .btn {
+  background: white;
+  color: #7209b7;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+.social { margin-top: 20px; }
+.social-btn {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 20px;
+  background: white;
+  color: #7209b7;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.top-link {
+  position: fixed;
+  right: 20px; bottom: 20px;
+  background: white;
+  color: #7209b7;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.error {
+  color: #ffcc00;
+  margin-top: 10px;
+}
+footer {
+  margin-top: 40px;
+  font-size: 0.8em;
+  color: #ddd;
+}
