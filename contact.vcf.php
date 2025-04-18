@@ -1,20 +1,35 @@
 <?php
-header('Content-Type: text/vcard');
-header('Content-Disposition: attachment; filename="contacts.vcf"');
-
-$csvFile = 'contacts.csv';
-
-if (!file_exists($csvFile)) {
-    die("Aucun contact trouvé.");
-}
-
-$lines = file($csvFile, FILE_IGNORE_NEW_LINES);
-foreach ($lines as $line) {
-    list($name, $number) = explode(',', $line);
-    echo "BEGIN:VCARD\n";
-    echo "VERSION:3.0\n";
-    echo "FN:" . htmlspecialchars($name) . "\n";
-    echo "TEL:" . htmlspecialchars($number) . "\n";
-    echo "END:VCARD\n";
+session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (($_POST['pwd'] ?? '') === '2025') {
+    header('Content-Type: text/vcard');
+    header('Content-Disposition: attachment; filename="contacts.vcf"');
+    readfile(__DIR__.'/contact.vcf');
+    exit;
+  } else {
+    $err = "Mot de passe incorrect.";
+  }
 }
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Protection VCF</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Téléchargement sécurisé</h1>
+    <form method="POST">
+      <input type="password" name="pwd" placeholder="Entrez le mot de passe" required>
+      <button type="submit">Valider</button>
+    </form>
+    <?php if (!empty($err)): ?>
+      <p class="error"><?= htmlspecialchars($err) ?></p>
+    <?php endif; ?>
+    <a href="index.html" class="btn">Retour à l'accueil</a>
+  </div>
+</body>
+</html>
