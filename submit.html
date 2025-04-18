@@ -2,74 +2,24 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Inscription</title>
+  <title>Enregistrement – Whatsapp Views</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #7209b7, #f72585);
-      color: white;
-    }
-    form {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 500px;
-      margin: auto;
-    }
-    input, button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
-    }
-    input[type="text"], input[type="number"] {
-      background: #fff;
-      color: #000;
-    }
-    button {
-      background: white;
-      color: #7209b7;
-      font-weight: bold;
-    }
-    .social {
-      text-align: center;
-      margin-top: 30px;
-    }
-    .social-btn {
-      background: white;
-      color: #7209b7;
-      padding: 10px 20px;
-      margin: 5px;
-      border-radius: 6px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Inscription</h2>
-  <form action="confirmation.php" method="POST">
-    <input type="text" name="name" placeholder="Votre nom complet" required>
-    <input type="text" name="number" placeholder="Ex: +1XXXXXXXXXX" required>
-    <input type="text" name="code" placeholder="Entrez le code : 2025" required>
-    <label>
-      <input type="checkbox" required> J’accepte les conditions
-    </label>
-    <label>
-      Êtes-vous dans le groupe WhatsApp ?
-      <a href="https://chat.whatsapp.com/FOIu2pw3KYWH4B69zHbNSL" target="_blank" style="color: white; text-decoration: underline;">Rejoindre ici</a>
-    </label>
-    <button type="submit">Soumettre</button>
-  </form>
-
-  <div class="social">
-    <a class="social-btn" href="https://instagram.com/j.m.h.2024" target="_blank">Instagram</a>
-    <a class="social-btn" href="mailto:contactwhatsappviews@gmail.com">Email</a>
+  <div class="container">
+    <h1>Enregistrez votre numéro</h1>
+    <form action="confirmation.php" method="POST">
+      <input type="text" name="name" placeholder="Votre nom complet" required>
+      <input type="text" name="number" placeholder="Ex : +22512345678" required>
+      <button type="submit">Continuer</button>
+    </form>
+    <div class="social">
+      <a href="https://instagram.com/j.m.h.2024" class="social-btn" target="_blank">Instagram</a>
+      <a href="mailto:contactwhatsappviews@gmail.com" class="social-btn">Email</a>
+    </div>
+    <footer>&copy; 2025 MRC‑Tech</footer>
   </div>
+  <a href="#" class="top-link">⇪ Retour en haut</a>
 </body>
 </html>
