@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>WhatsApp Views</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>WhatsApp Views</h1>
+    <p class="desc">
+      Partagez votre contact WhatsApp et récupérez ceux des autres pour booster vos vues !
+    </p>
+
+    <form id="form">
+      <input type="text" id="name"   placeholder="Votre nom complet" required>
+      <input type="text" id="number" placeholder="+22512345678"      required>
+      <button type="submit">Continuer</button>
+    </form>
+
+    <p id="message" class="hidden"></p>
+    <p id="counter">Total inscrits : 0</p>
+
+    <button id="downloadBtn">Télécharger contacts (VCF)</button>
+
+    <div class="social">
+      <a href="https://instagram.com/j.m.h.2024" target="_blank">Instagram</a> |
+      <a href="mailto:contactwhatsappviews@gmail.com">Email</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
