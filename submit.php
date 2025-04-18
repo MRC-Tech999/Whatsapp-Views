@@ -1,43 +1,48 @@
 <?php
-// 1) Si POST, on traite l'enregistrement
+// submit.php
+
+// --- Traitement POST ---
 $success = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $name   = trim($_POST['name']   ?? '');
-  $number = trim($_POST['number'] ?? '');
-  // Validation basique
-  if ($name !== '' && preg_match('/^\+\d{6,15}$/', $number)) {
-    $csvFile = __DIR__ . '/contacts.csv';
-    $vcfFile = __DIR__ . '/contact.vcf';
-    // Si CSV inexistant, on ajoute l'entête
-    if (!file_exists($csvFile)) {
-      file_put_contents($csvFile, "name,number\n");
+    $name   = trim($_POST['name']   ?? '');
+    $number = trim($_POST['number'] ?? '');
+
+    // Validation basique
+    if ($name !== '' && preg_match('/^\+\d{6,15}$/', $number)) {
+        $csvFile = __DIR__ . '/contacts.csv';
+        $vcfFile = __DIR__ . '/contact.vcf';
+
+        // Crée contacts.csv si nécessaire, avec en‑tête
+        if (!file_exists($csvFile)) {
+            file_put_contents($csvFile, "name,number\n");
+        }
+
+        // Lecture pour détection de doublon
+        $lines = file($csvFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $isNew = true;
+        foreach ($lines as $i => $line) {
+            if ($i === 0) continue; // on saute l'en‑tête
+            list(, $num) = explode(',', $line);
+            if ($num === $number) {
+                $isNew = false;
+                break;
+            }
+        }
+
+        // Si nouveau, on ajoute et on régénère le VCF
+        if ($isNew) {
+            file_put_contents($csvFile, "$name,$number\n", FILE_APPEND);
+            include __DIR__ . '/generate_vcf.php';
+            $success = true;
+        }
     }
-    // Vérifier doublon
-    $lines = file($csvFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    $isNew = true;
-    foreach ($lines as $i => $line) {
-      if ($i === 0) continue;
-      list(, $num) = explode(',', $line);
-      if ($num === $number) {
-        $isNew = false;
-        break;
-      }
-    }
-    if ($isNew) {
-      // Ajout au CSV
-      file_put_contents($csvFile, "$name,$number\n", FILE_APPEND);
-      // Regénération du VCF
-      include __DIR__ . '/generate_vcf.php';
-      $success = true;
-    }
-  }
 }
 
-// 2) On calcule le compteur
+// --- Calcul du compteur ---
 $count = 0;
 if (file_exists(__DIR__ . '/contacts.csv')) {
-  $all = file(__DIR__ . '/contacts.csv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-  $count = max(0, count($all) - 1);
+    $all = file(__DIR__ . '/contacts.csv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $count = max(0, count($all) - 1);
 }
 ?>
 <!DOCTYPE html>
