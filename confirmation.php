@@ -58,7 +58,7 @@ if (!$alreadyAdded) {
 <body>
   <h2>Merci <?= htmlspecialchars($name) ?> !</h2>
   <p>Vous êtes bien enregistré (ID #<?= $id ?>).</p>
-  <a class="social-btn" href="contacts.vcf" download>Télécharger le fichier VCF</a>
+  <a class="social-btn" href="contact.vcf.php">Télécharger le fichier VCF</a>
 
   <div class="social">
     <a class="social-btn" href="https://instagram.com/j.m.h.2024" target="_blank">Instagram</a>
