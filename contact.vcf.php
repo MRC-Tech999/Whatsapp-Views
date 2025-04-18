@@ -1,23 +1,20 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = ""; // mot de passe MySQL
-$db = "whatsapp_views";
-
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) die("Connexion échouée");
-
 header('Content-Type: text/vcard');
 header('Content-Disposition: attachment; filename="contacts.vcf"');
 
-$result = $conn->query("SELECT name, phone FROM contacts");
-while ($row = $result->fetch_assoc()) {
-  echo "BEGIN:VCARD\n";
-  echo "VERSION:3.0\n";
-  echo "FN:" . $row['name'] . "\n";
-  echo "TEL:" . $row['phone'] . "\n";
-  echo "END:VCARD\n\n";
+$csvFile = 'contacts.csv';
+
+if (!file_exists($csvFile)) {
+    die("Aucun contact trouvé.");
 }
 
-$conn->close();
+$lines = file($csvFile, FILE_IGNORE_NEW_LINES);
+foreach ($lines as $line) {
+    list($name, $number) = explode(',', $line);
+    echo "BEGIN:VCARD\n";
+    echo "VERSION:3.0\n";
+    echo "FN:" . htmlspecialchars($name) . "\n";
+    echo "TEL:" . htmlspecialchars($number) . "\n";
+    echo "END:VCARD\n";
+}
 ?>
