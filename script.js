@@ -1,12 +1,37 @@
-// Charger les contacts depuis le localStorage s'ils existent
-let contacts = JSON.parse(localStorage.getItem('contacts2025')) || [];
+// Importer les fonctions nécessaires de Firebase SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
 
-// Mettre à jour le compteur à l'ouverture de la page
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('count').textContent = "Nombre de contacts : " + contacts.length;
-});
+// Configuration Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyB_oSRa9qh8CoV1rteVbyAqUr3dGrro9wY",
+  authDomain: "whatsapp-views-52637.firebaseapp.com",
+  databaseURL: "https://whatsapp-views-52637-default-rtdb.firebaseio.com",
+  projectId: "whatsapp-views-52637",
+  storageBucket: "whatsapp-views-52637.firebasestorage.app",
+  messagingSenderId: "374291501495",
+  appId: "1:374291501495:web:81fff180e4df890b489832",
+  measurementId: "G-L2XNP3PPJ9"
+};
 
-// Gestion du formulaire d'ajout
+// Initialiser Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const database = getDatabase(app);
+
+// Met à jour le nombre de contacts en temps réel
+function updateCount() {
+  const countDisplay = document.getElementById('count');
+  const contactsRef = ref(database, 'contacts');
+  onValue(contactsRef, (snapshot) => {
+    const contacts = snapshot.val();
+    const count = contacts ? Object.keys(contacts).length : 0;
+    countDisplay.textContent = "Nombre de contacts : " + count;
+  });
+}
+
+// Ajouter un contact à Firebase
 document.getElementById('contact-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -14,55 +39,73 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   const phone = document.getElementById('phone').value.trim();
 
   if (name && phone) {
-    contacts.push({ name, phone });
-    localStorage.setItem('contacts2025', JSON.stringify(contacts));
+    const contactsRef = ref(database, 'contacts');
+    const newContactRef = push(contactsRef);
+    set(newContactRef, {
+      name: name,
+      phone: phone
+    });
 
-    document.getElementById('count').textContent = "Nombre de contacts : " + contacts.length;
+    // Réinitialiser le formulaire
     document.getElementById('contact-form').reset();
-    alert("Contact ajouté !");
+    updateCount();
+  } else {
+    alert("Veuillez remplir tous les champs !");
   }
 });
 
-// Télécharger le fichier VCF
+// Télécharger les contacts sous forme de fichier VCF
 document.getElementById('download-btn').addEventListener('click', function() {
-  if (contacts.length === 0) {
-    alert("Aucun contact ajouté !");
-    return;
-  }
-
   const password = prompt("Entrez le mot de passe pour télécharger le fichier :");
+
+  // Vérification du mot de passe
   if (password !== "2025") {
     alert("Mot de passe incorrect !");
     return;
   }
 
-  let vcfContent = '';
-  contacts.forEach(contact => {
-    vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:${contact.name}\nTEL:${contact.phone}\nEND:VCARD\n`;
+  const contactsRef = ref(database, 'contacts');
+  onValue(contactsRef, (snapshot) => {
+    const contacts = snapshot.val();
+    if (!contacts) {
+      alert("Aucun contact ajouté !");
+      return;
+    }
+
+    let vcfContent = '';
+    Object.values(contacts).forEach(contact => {
+      vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:${contact.name}\nTEL:${contact.phone}\nEND:VCARD\n`;
+    });
+
+    const blob = new Blob([vcfContent], { type: 'text/vcard' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'contacts.vcf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   });
-
-  const blob = new Blob([vcfContent], { type: 'text/vcard' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'contacts_2025.vcf';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
 });
 
-// Partager via WhatsApp
+// Partager les contacts via WhatsApp
 document.getElementById('whatsapp-btn').addEventListener('click', function() {
-  if (contacts.length === 0) {
-    alert("Ajoute au moins un contact d'abord !");
-    return;
-  }
+  const contactsRef = ref(database, 'contacts');
+  onValue(contactsRef, (snapshot) => {
+    const contacts = snapshot.val();
+    if (!contacts) {
+      alert("Ajoute au moins un contact d'abord !");
+      return;
+    }
 
-  const message = encodeURIComponent(
-    "Voici les contacts à ajouter (générés avec l'outil 2025). Envoie-moi ton fichier .vcf si tu veux le recevoir."
-  );
+    const message = encodeURIComponent("Voici mes contacts WhatsApp : \n\n" +
+      Object.values(contacts).map(contact => `${contact.name}: ${contact.phone}`).join('\n'));
 
-  const whatsappURL = `https://wa.me/?text=${message}`;
-  window.open(whatsappURL, '_blank');
+    const whatsappURL = `https://wa.me/?text=${message}`;
+    window.open(whatsappURL, '_blank');
+  });
 });
-        
+
+// Appel de la fonction pour mettre à jour le compteur des contacts
+updateCount();
+  
