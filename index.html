@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Générateur de VCF - 2025</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h2>Partage rapide de contacts pour WhatsApp et autres apps</h2>
+    <p>Ce site permet aux utilisateurs de créer un fichier VCF contenant plusieurs numéros de téléphone. Idéal pour partager facilement des contacts sur WhatsApp, Telegram ou par message.</p>
+  </header>
+
+  <div class="container">
+    <h1>Ajouter un contact</h1>
+    <form id="contact-form">
+      <input type="text" id="name" placeholder="Nom complet" required>
+      <input type="tel" id="phone" placeholder="Numéro de téléphone" required>
+      <button type="submit">Ajouter le contact</button>
+    </form>
+
+    <p id="count">Nombre de contacts : 0</p>
+    <button id="download-btn">Télécharger VCF</button>
+    <button id="whatsapp-btn">Partager via WhatsApp</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
