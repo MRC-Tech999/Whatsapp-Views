@@ -1,55 +1,96 @@
+:root {
+  --day-bg: #ffffff;
+  --day-text: #000000;
+  --night-bg: #1c1c1e;
+  --night-text: #f5f5f5;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #e0f7fa; /* bleu très clair */
-  text-align: center;
-  padding: 40px;
+  background-color: var(--day-bg);
+  color: var(--day-text);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  padding: 20px;
 }
 
 header {
-  max-width: 600px;
-  margin: auto;
-  margin-bottom: 30px;
   text-align: center;
-}
-
-header h2 {
-  margin-bottom: 10px;
-  color: #00796b; /* vert foncé */
-}
-
-header p {
-  color: #004d40; /* vert très foncé */
-  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 .container {
-  background: #ffffff;
-  padding: 30px;
-  max-width: 400px;
-  margin: auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: background-color 0.5s ease;
 }
 
-input {
-  width: 90%;
-  padding: 10px;
+input, button {
+  display: block;
+  width: 100%;
   margin: 10px 0;
-  border: 1px solid #b2dfdb;
-  border-radius: 4px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 button {
-  padding: 10px 20px;
-  margin: 10px 5px;
   cursor: pointer;
-  background-color: #00796b;
+  background-color: #25D366;
   color: white;
   border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #004d40;
-  }
+button:active {
+  transform: scale(0.95);
+  background-color: #128C7E;
+}
+
+/* Animation sur clic bouton télécharger */
+#download-btn.clicked {
+  animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); background-color: #25D366; }
+  50% { transform: scale(1.1); background-color: #128C7E; }
+  100% { transform: scale(1); background-color: #25D366; }
+}
+
+/* Lien vers le channel */
+a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #128C7E;
+}
+
+
+.color-1 { background-color: #e3f2fd; color: #0d47a1; }
+.color-2 { background-color: #fce4ec; color: #880e4f; }
+.color-3 { background-color: #f3e5f5; color: #4a148c; }
+.color-4 { background-color: #e8f5e9; color: #1b5e20; }
+.color-5 { background-color: #fff3e0; color: #e65100; }
+
+/* Mode nuit */
+body.night {
+  background-color: var(--night-bg);
+  color: var(--night-text);
+}
+
+body.night .container {
+  background-color: rgba(28, 28, 30, 0.95);
+}
+
+body.night input,
+body.night button {
+  background-color: #2c2c2e;
+  color: #ffffff;
+  border: 1px solid #444;
+}
