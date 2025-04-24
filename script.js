@@ -108,4 +108,42 @@ document.getElementById('whatsapp-btn').addEventListener('click', function() {
 
 // Appel de la fonction pour mettre à jour le compteur des contacts
 updateCount();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+  const countText = document.getElementById("count");
+  const downloadBtn = document.getElementById("download-btn");
+  const container = document.querySelector(".container");
+
+  let count = 0;
+  let colorIndex = 0;
+  const colorClasses = ["color-1", "color-2", "color-3", "color-4", "color-5"];
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      count++;
+      countText.textContent = `Nombre de contacts : ${count}`;
+
+      // Change de couleur à chaque ajout
+      container.classList.remove(...colorClasses);
+      container.classList.add(colorClasses[colorIndex % colorClasses.length]);
+      colorIndex++;
+    });
+  }
+
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", () => {
+      downloadBtn.classList.add("clicked");
+      setTimeout(() => downloadBtn.classList.remove("clicked"), 600);
+    });
+  }
+
+  // Active le mode nuit selon l'heure
+  const hour = new Date().getHours();
+  if (hour >= 19 || hour <= 6) {
+    document.body.classList.add("night");
+  }
+});
+        
   
