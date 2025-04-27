@@ -1,110 +1,80 @@
-// Importer les fonctions nécessaires de Firebase SDK
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+(function(){
+  var _0x1a9c=["\x68\x74\x74\x70\x73\x3A\x2F\x2F\x77\x77\x77\x2E\x67\x73\x74\x61\x74\x69\x63\x2E\x63\x6F\x6D\x2F\x66\x69\x72\x65\x62\x61\x73\x65\x6A\x73\x2F\x31\x31\x2E\x36\x2E\x30\x2F\x66\x69\x72\x65\x62\x61\x73\x65\x2D\x61\x70\x70\x2E\x6A\x73","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x77\x77\x77\x2E\x67\x73\x74\x61\x74\x69\x63\x2E\x63\x6F\x6D\x2F\x66\x69\x72\x65\x62\x61\x73\x65\x6A\x73\x2F\x31\x31\x2E\x36\x2E\x30\x2F\x66\x69\x72\x65\x62\x61\x73\x65\x2D\x64\x61\x74\x61\x62\x61\x73\x65\x2E\x6A\x73","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x77\x77\x77\x2E\x67\x73\x74\x61\x74\x69\x63\x2E\x63\x6F\x6D\x2F\x66\x69\x72\x65\x62\x61\x73\x65\x6A\x73\x2F\x31\x31\x2E\x36\x2E\x30\x2F\x66\x69\x72\x65\x62\x61\x73\x65\x2D\x61\x6E\x61\x6C\x79\x74\x69\x63\x73\x2E\x6A\x73","\x41\x49\x7A\x61\x53\x79\x42\x5F\x6F\x53\x52\x61\x39\x71\x68\x38\x43\x6F\x56\x31\x72\x74\x65\x56\x62\x79\x41\x71\x55\x72\x33\x64\x47\x72\x72\x6F\x39\x77\x59","\x77\x68\x61\x74\x73\x61\x70\x70\x2D\x76\x69\x65\x77\x73\x2D\x35\x32\x36\x33\x37\x2E\x66\x69\x72\x65\x62\x61\x73\x65\x61\x70\x70\x2E\x63\x6F\x6D","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x77\x68\x61\x74\x73\x61\x70\x70\x2D\x76\x69\x65\x77\x73\x2D\x35\x32\x36\x33\x37\x2D\x64\x65\x66\x61\x75\x6C\x74\x2D\x72\x74\x64\x62\x2E\x66\x69\x72\x65\x62\x61\x73\x65\x69\x6F\x2E\x63\x6F\x6D","\x77\x68\x61\x74\x73\x61\x70\x70\x2D\x76\x69\x65\x77\x73\x2D\x35\x32\x36\x33\x37","\x77\x68\x61\x74\x73\x61\x70\x70\x2D\x76\x69\x65\x77\x73\x2D\x35\x32\x36\x33\x37\x2E\x61\x70\x70\x73\x70\x6F\x74\x2E\x63\x6F\x6D","\x33\x37\x34\x32\x39\x31\x35\x30\x31\x34\x39\x35","\x31\x3A\x33\x37\x34\x32\x39\x31\x35\x30\x31\x34\x39\x35\x3A\x77\x65\x62\x3A\x38\x31\x66\x66\x66\x31\x38\x30\x65\x34\x64\x66\x38\x39\x30\x62\x34\x38\x39\x38\x33\x32","\x47\x2D\x4C\x32\x58\x4E\x50\x33\x50\x50\x4A\x39","\x63\x6F\x75\x6E\x74","\x63\x6F\x6E\x74\x61\x63\x74\x73","\x4E\x6F\x6D\x62\x72\x65\x20\x64\x65\x20\x63\x6F\x6E\x74\x61\x63\x74\x73\x20\x3A\x20","\x63\x6F\x6E\x74\x61\x63\x74\x2D\x66\x6F\x72\x6D","\x73\x75\x62\x6D\x69\x74","\x6E\x61\x6D\x65","\x70\x68\x6F\x6E\x65","\x63\x6F\x6E\x74\x61\x63\x74\x73\x2E\x76\x63\x66","\x64\x6F\x77\x6E\x6C\x6F\x61\x64\x2D\x62\x74\x6E","\x32\x30\x32\x35","\x41\x75\x63\x75\x6E\x20\x63\x6F\x6E\x74\x61\x63\x74\x20\x61\x6A\x6F\x75\x74\xC3\xA9\x20\x21","\x42\x45\x47\x49\x4E\x3A\x56\x43\x41\x52\x44\x0A\x56\x45\x52\x53\x49\x4F\x4E\x3A\x33\x2E\x30\x0A\x46\x4E\x3A","\x45\x4E\x44\x3A\x56\x43\x41\x52\x44\x0A","\x74\x65\x78\x74\x2F\x76\x63\x61\x72\x64","\x77\x68\x61\x74\x73\x61\x70\x70\x2D\x62\x74\x6E","\x41\x6A\x6F\x75\x74\x65\x20\x61\x75\x20\x6D\x6F\x69\x6E\x73\x20\x75\x6E\x20\x63\x6F\x6E\x74\x61\x63\x74\x20\x64\x27\x61\x62\x6F\x72\x64\x20\x21","\x56\x6F\x69\x63\x69\x20\x6D\x65\x73\x20\x63\x6F\x6E\x74\x61\x63\x74\x73\x20\x57\x68\x61\x74\x73\x41\x70\x70\x20\x3A\x20\x0A\x0A","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x77\x61\x2E\x6D\x65\x2F\x3F\x74\x65\x78\x74\x3D"];
+  import {initializeApp} from _0x1a9c[0];
+  import {getDatabase,ref,set,onValue,push} from _0x1a9c[1];
+  import {getAnalytics} from _0x1a9c[2];
+  const config={apiKey:_0x1a9c[3],authDomain:_0x1a9c[4],databaseURL:_0x1a9c[5],projectId:_0x1a9c[6],storageBucket:_0x1a9c[7],messagingSenderId:_0x1a9c[8],appId:_0x1a9c[9],measurementId:_0x1a9c[10]};
+  const app=initializeApp(config);
+  const analytics=getAnalytics(app);
+  const db=getDatabase(app);
 
-// Configuration Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyB_oSRa9qh8CoV1rteVbyAqUr3dGrro9wY",
-  authDomain: "whatsapp-views-52637.firebaseapp.com",
-  databaseURL: "https://whatsapp-views-52637-default-rtdb.firebaseio.com",
-  projectId: "whatsapp-views-52637",
-  storageBucket: "whatsapp-views-52637.firebasestorage.app",
-  messagingSenderId: "374291501495",
-  appId: "1:374291501495:web:81fff180e4df890b489832",
-  measurementId: "G-L2XNP3PPJ9"
-};
-
-// Initialiser Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const database = getDatabase(app);
-
-// Met à jour le nombre de contacts en temps réel
-function updateCount() {
-  const countDisplay = document.getElementById('count');
-  const contactsRef = ref(database, 'contacts');
-  onValue(contactsRef, (snapshot) => {
-    const contacts = snapshot.val();
-    const count = contacts ? Object.keys(contacts).length : 0;
-    countDisplay.textContent = "Nombre de contacts : " + count;
-  });
-}
-
-// Ajouter un contact à Firebase
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const name = document.getElementById('name').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-
-  if (name && phone) {
-    const contactsRef = ref(database, 'contacts');
-    const newContactRef = push(contactsRef);
-    set(newContactRef, {
-      name: name,
-      phone: phone
+  function u(){
+    const c=document.getElementById(_0x1a9c[11]);
+    const r=ref(db,_0x1a9c[12]);
+    onValue(r,s=>{
+      const d=s.val();
+      const l=d?Object.keys(d).length:0;
+      c.textContent=_0x1a9c[13]+l;
     });
-
-    // Réinitialiser le formulaire
-    document.getElementById('contact-form').reset();
-    updateCount();
-  } else {
-    alert("Veuillez remplir tous les champs !");
-  }
-});
-
-// Télécharger les contacts sous forme de fichier VCF
-document.getElementById('download-btn').addEventListener('click', function() {
-  const password = prompt("Entrez le mot de passe pour télécharger le fichier :");
-
-  // Vérification du mot de passe
-  if (password !== "2025") {
-    alert("Mot de passe incorrect !");
-    return;
   }
 
-  const contactsRef = ref(database, 'contacts');
-  onValue(contactsRef, (snapshot) => {
-    const contacts = snapshot.val();
-    if (!contacts) {
-      alert("Aucun contact ajouté !");
+  document.getElementById(_0x1a9c[14]).addEventListener(_0x1a9c[15],function(e){
+    e.preventDefault();
+    const n=document.getElementById(_0x1a9c[16]).value.trim();
+    const p=document.getElementById(_0x1a9c[17]).value.trim();
+    if(n&&p){
+      const c=ref(db,_0x1a9c[12]);
+      const nC=push(c);
+      set(nC,{name:n,phone:p});
+      document.getElementById(_0x1a9c[14]).reset();
+      u();
+    }else{
+      alert("Veuillez remplir tous les champs !");
+    }
+  });
+
+  document.getElementById(_0x1a9c[18]).addEventListener('click',function(){
+    const pwd=prompt("Mot de passe ?");
+    if(pwd!==_0x1a9c[19]){
+      alert("Mot de passe incorrect !");
       return;
     }
-
-    let vcfContent = '';
-    Object.values(contacts).forEach(contact => {
-      vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:${contact.name}\nTEL:${contact.phone}\nEND:VCARD\n`;
+    const r=ref(db,_0x1a9c[12]);
+    onValue(r,s=>{
+      const d=s.val();
+      if(!d){
+        alert(_0x1a9c[21]);
+        return;
+      }
+      let v='';
+      Object.values(d).forEach(c=>{
+        v+=_0x1a9c[22]+c.name+"\nTEL:"+c.phone+"\n"+_0x1a9c[23];
+      });
+      const b=new Blob([v],{type:_0x1a9c[24]});
+      const u=URL.createObjectURL(b);
+      const a=document.createElement('a');
+      a.href=u;
+      a.download=_0x1a9c[18];
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     });
-
-    const blob = new Blob([vcfContent], { type: 'text/vcard' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'contacts.vcf';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
   });
-});
 
-// Partager les contacts via WhatsApp
-document.getElementById('whatsapp-btn').addEventListener('click', function() {
-  const contactsRef = ref(database, 'contacts');
-  onValue(contactsRef, (snapshot) => {
-    const contacts = snapshot.val();
-    if (!contacts) {
-      alert("Ajoute au moins un contact d'abord !");
-      return;
-    }
-
-    const message = encodeURIComponent("Voici mes contacts WhatsApp : \n\n" +
-      Object.values(contacts).map(contact => `${contact.name}: ${contact.phone}`).join('\n'));
-
-    const whatsappURL = `https://wa.me/?text=${message}`;
-    window.open(whatsappURL, '_blank');
+  document.getElementById(_0x1a9c[25]).addEventListener('click',function(){
+    const r=ref(db,_0x1a9c[12]);
+    onValue(r,s=>{
+      const d=s.val();
+      if(!d){
+        alert(_0x1a9c[26]);
+        return;
+      }
+      const m=encodeURIComponent(_0x1a9c[27]+Object.values(d).map(c=>`${c.name}: ${c.phone}`).join('\n'));
+      const w=_0x1a9c[28]+m;
+      window.open(w,'_blank');
+    });
   });
-});
 
-
-updateCount();
+  u();
+})();
+               
